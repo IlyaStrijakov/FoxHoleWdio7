@@ -1,32 +1,52 @@
-import Page from './page';
+import BasePage from "./Base.page";
 
-/**
- * sub page containing specific selectors and methods for a specific page
- */
-class LoginPage extends Page {
-    /**
-     * define selectors using getter methods
-     */
-    get inputUsername () { return $('#username') }
-    get inputPassword () { return $('#password') }
-    get btnSubmit () { return $('button[type="submit"]') }
+class LoginPage extends BasePage {
 
-    /**
-     * a method to encapsule automation code to interact with the page
-     * e.g. to login using username and password
-     */
+    get logInHeader() {
+        return $('.display-4');
+    }
+    get usernameLabel () {
+        return $$('.display-7.text-white')[0];
+    }
+    get usernameField(){
+        return $('#mat-input-0');
+    }
+    get passwordLabel () {
+        return $$('.display-7.text-white')[1];
+    }
+    get passwordField(){
+        return $('#mat-input-1');
+    }
+    get logInBtn (){
+        return $('.btn-danger');
+    }
+    get supportText(){
+        return $$('.mt-1.text-white.display-8')[0];
+    }
+    get signIn(){
+        return $$('a[href="#/register"]')[1];
+    }
+    get termsOfService(){
+        return $('a[href="https://pilled.blob.core.windows.net/general/TERMS OF USE.pdf"]');
+    }
+    get privacyPolicy(){
+        return $('a[href="https://pilled.blob.core.windows.net/general/PRIVACY POLICY.pdf"]');
+    }
+    get forgotPasswordOrUsername (){
+        return $$('.mt-1.text-white.display-8')[1];
+    }
+    get supportIssuesText (){
+        return $$('.mt-1.text-white.display-8')[2];
+    }
     login (username, password) {
-        this.inputUsername.setValue(username);
-        this.inputPassword.setValue(password);
-        this.btnSubmit.click(); 
+        this.usernameField.setValue('AutoTestQA');
+        this.passwordField.setValue('Qwerty8387');
+        this.logInBtn.click();
+    }
+    open () {
+        return super.open("/#/login");
     }
 
-    /**
-     * overwrite specifc options to adapt it to page object
-     */
-    open () {
-        return super.open('login');
-    }
 }
 
 export default new LoginPage();
